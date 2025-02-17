@@ -93,6 +93,4 @@ Contributions are welcome. Please fork the repository, make your changes, and su
 
 References
 ----------
-
-*   [Using dd with netcat – Linux Journal](https://www.linuxjournal.com/article/10076)
 *   [GNU Bash Manual](https://www.gnu.org/software/bash/manual/bash.html)
