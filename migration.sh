@@ -141,7 +141,7 @@ fi
 # Start remote dd (destination) via netcat listener in the background.
 # The remote SSH user must have sufficient privileges to write to $dest_path.
 echo "Starting destination listener..."
-remote_ssh "nohup bash -c 'nc -l -p ${nc_port} | dd of=${dest_path} bs=64K' > /tmp/dd_migrate.log 2>&1 &"
+remote_ssh "nohup bash -c 'nc -l -p ${nc_port} -q 1 | dd of=${dest_path} bs=64K' > /tmp/dd_migrate.log 2>&1 &"
 
 # Wait a few seconds to ensure the remote listener is up
 sleep 3
