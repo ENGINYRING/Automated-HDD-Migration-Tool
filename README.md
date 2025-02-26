@@ -56,12 +56,12 @@ Download the migration script directly using either `wget` or `curl`:
 
 ```bash
 # Using wget
-wget -O disk-migration.sh https://raw.githubusercontent.com/ENGINYRING/Automated-HDD-Migration-Tool/refs/heads/main/disk-migration.sh
-chmod +x disk-migration.sh
+wget -O migration.sh https://raw.githubusercontent.com/ENGINYRING/Automated-HDD-Migration-Tool/refs/heads/main/migration.sh
+chmod +x migration.sh
 
 # Using curl
-curl -o disk-migration.sh https://raw.githubusercontent.com/ENGINYRING/Automated-HDD-Migration-Tool/refs/heads/main/disk-migration.sh
-chmod +x disk-migration.sh
+curl -o migration.sh https://raw.githubusercontent.com/ENGINYRING/Automated-HDD-Migration-Tool/refs/heads/main/migration.sh
+chmod +x migration.sh
 ```
 
 ## Usage
@@ -71,7 +71,7 @@ chmod +x disk-migration.sh
 Run the script with no arguments for interactive mode:
 
 ```bash
-sudo ./disk-migration.sh
+sudo ./migration.sh
 ```
 
 ### Command-Line Arguments
@@ -79,39 +79,39 @@ sudo ./disk-migration.sh
 For scripting or automation, use command-line arguments:
 
 ```bash
-sudo ./disk-migration.sh -s sda -d sdb -H remote.host -u admin
+sudo ./migration.sh -s sda -d sdb -H remote.host -u admin
 ```
 
 ### Using Advanced Features
 
 #### With Data Validation
 ```bash
-sudo ./disk-migration.sh -s sda -d sdb -H remote.host -u admin --validate
+sudo ./migration.sh -s sda -d sdb -H remote.host -u admin --validate
 ```
 
 #### With Compression (for slow networks)
 ```bash
-sudo ./disk-migration.sh -s sda -d sdb -H remote.host -u admin --compress
+sudo ./migration.sh -s sda -d sdb -H remote.host -u admin --compress
 ```
 
 #### For Live Systems (using LVM)
 ```bash
-sudo ./disk-migration.sh -s sda -d sdb -H remote.host -u admin --snapshot
+sudo ./migration.sh -s sda -d sdb -H remote.host -u admin --snapshot
 ```
 
 #### With Transfer Encryption
 ```bash
-sudo ./disk-migration.sh -s sda -d sdb -H remote.host -u admin --encrypt
+sudo ./migration.sh -s sda -d sdb -H remote.host -u admin --encrypt
 ```
 
 #### Limiting Bandwidth
 ```bash
-sudo ./disk-migration.sh -s sda -d sdb -H remote.host -u admin -l 10M
+sudo ./migration.sh -s sda -d sdb -H remote.host -u admin -l 10M
 ```
 
 #### Resuming an Interrupted Transfer
 ```bash
-sudo ./disk-migration.sh -s sda -d sdb -H remote.host -u admin --continue
+sudo ./migration.sh -s sda -d sdb -H remote.host -u admin --continue
 ```
 
 > **Note**: Always run this command on the same source server where the original transfer was initiated.
@@ -119,7 +119,7 @@ sudo ./disk-migration.sh -s sda -d sdb -H remote.host -u admin --continue
 ### Complete Options List
 
 ```
-Usage: ./disk-migration.sh [OPTIONS]
+Usage: ./migration.sh [OPTIONS]
 
 Disk Migration Tool - Safely clone disks over SSH
 
@@ -151,10 +151,10 @@ The script can load settings from configuration files:
 
 ```bash
 # Use default configuration
-sudo ./disk-migration.sh
+sudo ./migration.sh
 
 # Use specific configuration file
-sudo ./disk-migration.sh -c /path/to/my-config.conf
+sudo ./migration.sh -c /path/to/my-config.conf
 ```
 
 A default configuration file is created in `$HOME/.config/disk-migration/config.conf` the first time you run the script. You can customize this file with your preferred settings.
@@ -249,7 +249,7 @@ One of the most powerful features of this tool is the ability to resume interrup
 If you need to specify a particular starting point manually:
 
 ```bash
-sudo ./disk-migration.sh -s sda -d sdb -H remote.host -u admin --offset 1073741824
+sudo ./migration.sh -s sda -d sdb -H remote.host -u admin --offset 1073741824
 ```
 
 This starts the transfer from the 1GB mark. This can be useful if you know exactly where a transfer failed or if you want to skip certain portions of the disk.
@@ -262,7 +262,7 @@ Use cron to schedule regular migrations:
 
 ```bash
 # Example cron entry for daily migration at 2 AM
-0 2 * * * /path/to/disk-migration.sh -c /path/to/config.conf > /var/log/scheduled-migration.log 2>&1
+0 2 * * * /path/to/migration.sh -c /path/to/config.conf > /var/log/scheduled-migration.log 2>&1
 ```
 
 ### Creating Disk Images
@@ -277,7 +277,7 @@ dd if=/dev/zero of=/path/to/disk.img bs=1M count=<size_in_MB>
 losetup /dev/loop0 /path/to/disk.img
 
 # Then use the script with loop0 as destination
-./disk-migration.sh -s sda -d loop0 -H destination-host -u admin
+./migration.sh -s sda -d loop0 -H destination-host -u admin
 ```
 
 ### Pre/Post Migration Scripts
@@ -291,7 +291,7 @@ umount /dev/sda1  # Unmount filesystems
 systemctl stop some-service  # Stop services
 
 # Run migration
-./disk-migration.sh -s sda -d sdb -H remote.host -u admin
+./migration.sh -s sda -d sdb -H remote.host -u admin
 
 # Post-migration tasks
 ssh user@remote.host "mount /dev/sdb1 /mnt && chroot /mnt grub-install /dev/sdb"
