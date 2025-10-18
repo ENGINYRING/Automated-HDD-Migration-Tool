@@ -308,3 +308,10 @@ This project is licensed under the [MIT License](LICENSE).
 ## Contributing
 
 Contributions are welcome. Please fork the repository, make your changes, and submit a pull request with a clear description of your improvements.
+
+* * *
+© 2025 ENGINYRING. All rights reserved.  
+
+* * *
+
+[Web hosting](https://www.enginyring.com/en/webhosting) | [VPS hosting](https://www.enginyring.com/en/virtual-servers) | [Free DevOps tools](https://www.enginyring.com/tools)
